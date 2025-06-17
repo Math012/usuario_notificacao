@@ -54,6 +54,7 @@ public class UsuarioConverter {
 
     public EnderecoDTO paraEnderecoDTO(Endereco endereco){
         return EnderecoDTO.builder()
+                .id(endereco.getId())
                 .rua(endereco.getRua())
                 .numero(endereco.getNumero())
                 .complemento(endereco.getComplemento())
@@ -80,6 +81,7 @@ public class UsuarioConverter {
 
     public TelefoneDTO paraTelefoneDTO(Telefone telefone){
         return TelefoneDTO.builder()
+                .id(telefone.getId())
                 .ddd(telefone.getDdd())
                 .numero(telefone.getNumero())
                 .build();
