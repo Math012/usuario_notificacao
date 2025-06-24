@@ -1,9 +1,11 @@
 package com.math012.usuario.controller;
 
 import com.math012.usuario.business.UsuarioService;
+import com.math012.usuario.business.ViaCepService;
 import com.math012.usuario.business.dto.EnderecoDTO;
 import com.math012.usuario.business.dto.TelefoneDTO;
 import com.math012.usuario.business.dto.UsuarioDTO;
+import com.math012.usuario.infra.client.dtoClient.ViaCepDTO;
 import com.math012.usuario.infra.entity.Usuario;
 import com.math012.usuario.infra.security.JwtUtil;
 import lombok.AllArgsConstructor;
@@ -19,10 +21,9 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-
     private final AuthenticationManager authenticationManager;
-
     private final JwtUtil jwtUtil;
+    private final ViaCepService viaCepService;
 
     @PostMapping
     public ResponseEntity<UsuarioDTO> salvaUsuario(@RequestBody UsuarioDTO usuarioDTO){
@@ -73,4 +74,9 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.cadastrarTelefone(token,telefoneDTO));
     }
 
+    @GetMapping("/endereco/{cep}")
+    public ResponseEntity<ViaCepDTO> buscarEnderecoViaCep(@PathVariable String cep){
+        return ResponseEntity.ok(viaCepService.buscarDadosDeEndereco(cep));
+
+    }
 }
